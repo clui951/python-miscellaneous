@@ -1,4 +1,5 @@
 def bisect(arr, x):
+	# Base cases of 0 or 1 element
 	if len(arr) == 0:
 		return 0
 	if len(arr) == 1:
@@ -7,9 +8,21 @@ def bisect(arr, x):
 		if x >= arr[0]:
 			return 1
 
+	# low and high are pointers to index range to search
+	# For every iteration, find the mid index, rounded down
+	# There are 3 cases:
+	#	val less than mid element
+	#		search lower half by moving high down
+	# 	val equals mid element
+	#		return mid index
+	# 	val greater than mid element
+	#		search upper half by moving low up
+	#		due to rounded down mid, if low == mid, just do low += 1
+	# After finishing iteration in while loop (low now == high), check to see the case that val is greater than all array elements
+	# 	if low is last index in arr, and val greater than that element, return one above highest index
+	#	else return low (or high)
 	low = 0
 	high = len(arr) - 1
-
 	while low != high:
 		mid = (low + high) // 2
 		if x < arr[mid]:
