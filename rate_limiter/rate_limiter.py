@@ -1,6 +1,18 @@
 # Enter your code here. Read input from STDIN. Print output to STDOUT
 
 
+# rateLimiter = RateLimiter(10)
+# assert rateLimiter.canSend(100, 3) == True #true
+# assert rateLimiter.getRate(100) == 3
+# assert rateLimiter.canSend(200, 4) == True # true
+# assert rateLimiter.getRate(100) == 7
+# assert rateLimiter.canSend(300, 9) == False # false
+# assert rateLimiter.getRate(100) == 7
+# assert rateLimiter.canSend(400, 1) == True # true
+# assert rateLimiter.getRate(100) == 8
+# assert rateLimiter.canSend(2000, 10) == True# true
+# assert rateLimiter.getRate(100) == 10
+
 # // /*class RateLimiter {
 # //   // Set maxRate in Bytes per second
 # //     RateLimiter(int maxBytes){   
@@ -9,9 +21,9 @@
 # //     boolean canSend(long timestamp, int bytes) {            
 # //      }
 
-# //   // Returns the total Bytes sent out in the last second at time = timestamp (milliseconds)
-# //  long getRate(long timestamp) {
-# // }
+# //     // Returns the total Bytes sent out in the last second at time = timestamp (milliseconds)
+# //     long getRate(long timestamp) {
+# //     }
 # // }*/
 
 class RateLimiter:
@@ -67,4 +79,10 @@ assert rateLimiter.getRate(100) == 10
 # if no requests yet, and call request > maxBytes
 # if requests exist, call request < / > maxBytes
 # if requests exist and need to be pruned, call request < / > maxBytes
+
+# downsides of design
+#   centralized bottleneck across threads/machines
+
+# O(# requests / second) ; O(n)
+
     
