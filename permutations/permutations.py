@@ -22,24 +22,47 @@ def permutations_internal(input):
 			for pp in permutations_internal(input[:i] + input[i+1:]):
 				yield input[i] + str(pp)
 
+# for every character
+# for each element in list so far, 
+#	create a new element by sticking character in every possible location (include the very end)
+# 	replace the running list with the current list generated after sticking in characters
+def permutations2(nums):
+	result_list = [[]]
+	for n in nums:
+		new_result_list = []
+		for res in result_list:
+			for i in range(len(res) + 1):
+				current_perm = res[:i] + [n] + res[i:]
+				new_result_list.append(current_perm)
+		result_list = new_result_list
+	
+	count = 0
+	for p in result_list:
+		count += 1
+		print(count, "".join(p))
+
+	return result_list
+
 	
 
 if __name__ == "__main__":
 	print("=== permutations ===")
 
-	permutations("")
-	print("--")
-	permutations("1")
-	print("--")
-	permutations("12")
-	print("--")
-	permutations("123")
+	# permutations("")
+	# print("--")
+	# permutations("1")
+	# print("--")
+	# permutations("12")
+	# print("--")
+	# permutations("123")
 	print("--")
 	permutations("1234")
+	print("--")
+	permutations2("1234")
 	# print("--")
 	# permutations("12345")
-	print("--")
-	permutations("12234")
+	# print("--")
+	# permutations("12234")
 	# print("--")
 	# permutations("12333455")
 
