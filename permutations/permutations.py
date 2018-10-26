@@ -22,6 +22,7 @@ def permutations_internal(input):
 			for pp in permutations_internal(input[:i] + input[i+1:]):
 				yield input[i] + str(pp)
 
+# RETURNING FULL LIST, MEMORY MUST BE O(# perms)
 # for every character
 # for each element in list so far, 
 #	create a new element by sticking character in every possible location (include the very end)
@@ -43,6 +44,29 @@ def permutations2(nums):
 
 	return result_list
 
+# PRINTING ALL ELEMENTS, MEMORY CAN BE LINEAR TO LENGTH IF DONE IN PLACE
+# done in place by nested function and swapping/backtracking
+# does not have to hold in memory all combinations previous
+def permutations3(nums):
+	count = 0
+	tracker = list(nums)
+	
+	def perm(nums, i):
+		nonlocal count 
+
+		if i == len(nums):
+			count += 1
+			print(count, "".join(tracker))
+			return
+		for j in range(i, len(nums)):
+			tracker[i], tracker[j] = tracker[j], tracker[i]
+			perm(nums, i + 1)
+			# backtracking
+			tracker[i], tracker[j] = tracker[j], tracker[i]
+
+	perm(nums, 0)
+
+
 	
 
 if __name__ == "__main__":
@@ -59,6 +83,8 @@ if __name__ == "__main__":
 	permutations("1234")
 	print("--")
 	permutations2("1234")
+	print("--")
+	permutations3("1234")
 	# print("--")
 	# permutations("12345")
 	# print("--")
